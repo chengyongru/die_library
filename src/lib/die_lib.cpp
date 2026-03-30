@@ -323,7 +323,7 @@ bool DIE_lib::_loadDatabase(QString sDatabase)
     bool bResult = false;
 
     if (g_pDieScript) {
-        bResult = g_pDieScript->loadDatabase(sDatabase, DiE_ScriptEngine::DT_MAIN);
+        bResult = g_pDieScript->_loadDatabase(sDatabase, XScanEngine::DT_MAIN);
     }
 
     return bResult;
@@ -336,7 +336,7 @@ QString DIE_lib::_scanFileEx(QString sFileName, quint32 nFlags)
     DiE_Script dieScript = *g_pDieScript;
 
     XScanEngine::SCAN_RESULT scanResult = dieScript.scanFile(sFileName, &scanOptions);
-    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1, nullptr);
 
     return model.toString();
 }
@@ -348,7 +348,7 @@ QString DIE_lib::_scanMemoryEx(char *pMemory, int nMemorySize, quint32 nFlags)
     DiE_Script dieScript = *g_pDieScript;
 
     XScanEngine::SCAN_RESULT scanResult = dieScript.scanMemory(pMemory, nMemorySize, &scanOptions);
-    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1, nullptr);
 
     return model.toString();
 }
@@ -358,10 +358,10 @@ QString DIE_lib::_scanFile(QString sFileName, quint32 nFlags, QString sDatabase)
     XScanEngine::SCAN_OPTIONS scanOptions = XScanEngine::getDefaultOptions(nFlags);
     DiE_Script dieScript;
 
-    dieScript.loadDatabase(sDatabase, DiE_ScriptEngine::DT_MAIN);
+    dieScript._loadDatabase(sDatabase, XScanEngine::DT_MAIN);
 
     XScanEngine::SCAN_RESULT scanResult = dieScript.scanFile(sFileName, &scanOptions);
-    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1, nullptr);
 
     return model.toString();
 }
@@ -371,10 +371,10 @@ QString DIE_lib::_scanMemory(char *pMemory, int nMemorySize, quint32 nFlags, QSt
     XScanEngine::SCAN_OPTIONS scanOptions = XScanEngine::getDefaultOptions(nFlags);
     DiE_Script dieScript;
 
-    dieScript.loadDatabase(sDatabase, DiE_ScriptEngine::DT_MAIN);
+    dieScript._loadDatabase(sDatabase, XScanEngine::DT_MAIN);
 
     XScanEngine::SCAN_RESULT scanResult = dieScript.scanMemory(pMemory, nMemorySize, &scanOptions);
-    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1, nullptr);
 
     return model.toString();
 }
