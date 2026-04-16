@@ -307,10 +307,10 @@ int DIE_lib::VB_ScanFileCallback(wchar_t *pwszFileName, unsigned int nFlags, wch
 
     DiE_Script dieScript;
 
-    dieScript.loadDatabase(sDatabase, DiE_ScriptEngine::DT_MAIN);
+    dieScript._loadDatabase(sDatabase, XScanEngine::DT_MAIN);
 
     XScanEngine::SCAN_RESULT scanResult = dieScript.scanFile(sFileName, &scanOptions);
-    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel model(&scanOptions, &(scanResult.listRecords), 1, nullptr);
 
     QString sResult = model.toString();
 
