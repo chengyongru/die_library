@@ -30,6 +30,7 @@ add_definitions(
     -DUSE_PDF
     -DUSE_ARCHIVE
     -DUSE_YARA
+    -DUSE_XIMD
 )
 
 include(${CMAKE_CURRENT_LIST_DIR}/../../dep/die_script/die_script.cmake)
@@ -60,6 +61,7 @@ target_link_libraries(die PRIVATE lzma)
 target_link_libraries(die PRIVATE zlib)
 target_link_libraries(die PRIVATE ppmd)
 target_link_libraries(die PRIVATE capstone_x86)
+target_link_libraries(die PRIVATE xsimd)
 
 if(${QT_VERSION_MAJOR} EQUAL 4)
     target_link_libraries(die PRIVATE Qt4::QtCore)

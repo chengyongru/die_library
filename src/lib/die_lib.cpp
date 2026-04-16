@@ -139,6 +139,10 @@ DIE_lib::DIE_lib()
 
     m_App = QCoreAppDLL::pApp;
 
+#ifdef USE_XSIMD
+    xsimd_init();
+#endif
+
     if (!g_pDieScript) {
         g_pDieScript = new DiE_Script;
     }
